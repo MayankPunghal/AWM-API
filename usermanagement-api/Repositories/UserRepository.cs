@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using usermanagement_api.Context;
+using usermanagement_api.DTOs;
 using usermanagement_api.Interfaces;
 using usermanagement_api.Models;
 
@@ -36,8 +37,40 @@ namespace usermanagement_api.Repositories
             catch (Exception ex)
             {
 
-                throw;
             }
         }
+        public async Task<PaginatedResultDto> GetUsersListPaginationAsync(int page, int size)
+        {
+            var skip = (page - 1) * size;
+            var totalUsers = await _context.usermasters.CountAsync();
+            try
+            {
+                var users = await _context.usermasters.Skip(skip)
+            .Take(size)
+            .ToListAsync();
+
+                var userList = users.Select(u => new UserListResponseDto
+                {
+                    UserId = u.profileid,
+                    Username = u.username,
+                    Email = u.emailid,
+                    FirstName = u.firstname,
+                    LastName = u.lastname,
+                    DisplayName = u.displayname,
+                    ContactNo = u.contactno
+                }).ToList();
+
+                return new PaginatedResultDto
+                {
+                    TotalCount = totalUsers,
+                    Users = userList
+                };
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
     }
 }
