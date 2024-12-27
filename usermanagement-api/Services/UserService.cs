@@ -22,7 +22,7 @@ namespace usermanagement_api.Services
         public async Task<string> AuthenticateAsync(string username, string password)
         {
             var user = await _userRepository.GetUserByUsernameAsync(username);
-            if (user == null || user.password != password.HashPassword())
+            if (user == null || user.password.VerifyPassword(password.HashPassword()))
                 throw new UnauthorizedAccessException("Invalid credentials.");
 
             var claims = new[]

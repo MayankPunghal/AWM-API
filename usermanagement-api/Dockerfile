@@ -7,6 +7,8 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
+# Set environment variables for DB connection
+ENV ConnectionStrings__DefaultConnection="Host=localhost;Port=5432;Username=awmappuser;Password=Smart2024%23;Database=usermanagement"
 
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build

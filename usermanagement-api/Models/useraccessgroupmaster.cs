@@ -19,11 +19,11 @@ public partial class useraccessgroupmaster
 
     public string updatedby { get; set; } = null!;
 
-    public DateTime? rcreate { get; set; }
+    public DateTime rcreate { get; set; }
 
-    public DateTime? rupdate { get; set; }
+    public DateTime rupdate { get; set; }
 
-    public string? revent { get; set; }
+    public DateTime revent { get; set; }
 
     public virtual ICollection<accessgroupright> accessgrouprights { get; set; } = new List<accessgroupright>();
 }

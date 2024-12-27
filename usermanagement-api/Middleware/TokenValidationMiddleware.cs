@@ -52,7 +52,7 @@ public class TokenValidationMiddleware
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(key),
                 ValidateIssuer = false,
-                ValidateAudience = true,
+                ValidateAudience = false,
                 ClockSkew = TimeSpan.Zero,
                 ValidAudiences = new[] { _jwtSettings.Audience }
             }, out _);
@@ -79,7 +79,7 @@ public class TokenValidationMiddleware
             // Attach the user principal to the context for later use
             context.User = principal;
         }
-        catch
+        catch(Exception ex)
         {
             // Token validation failed, handle accordingly
             context.Response.StatusCode = 401;

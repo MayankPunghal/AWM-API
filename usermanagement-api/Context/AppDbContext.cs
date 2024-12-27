@@ -42,7 +42,6 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("accessgroupright");
 
-            entity.Property(e => e.accessgrouprightid).ValueGeneratedNever();
             entity.Property(e => e.createdby).HasMaxLength(128);
             entity.Property(e => e.rcreate).HasDefaultValueSql("CURRENT_TIMESTAMP");
             entity.Property(e => e.revent).HasMaxLength(255);
@@ -71,7 +70,6 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("companysitemaster");
 
-            entity.Property(e => e.companysitemasterid).ValueGeneratedNever();
             entity.Property(e => e.active).HasDefaultValue(true);
             entity.Property(e => e.companycode).HasMaxLength(50);
             entity.Property(e => e.companyname).HasMaxLength(255);
@@ -91,7 +89,6 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("conditionmaster");
 
-            entity.Property(e => e.conditionmasterid).ValueGeneratedNever();
             entity.Property(e => e.appliestoobject).HasMaxLength(255);
             entity.Property(e => e.conditionname).HasMaxLength(255);
             entity.Property(e => e.createdby).HasMaxLength(128);
@@ -107,7 +104,6 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("logintracking");
 
-            entity.Property(e => e.logintrackingid).ValueGeneratedNever();
             entity.Property(e => e.loginresult).HasMaxLength(512);
             entity.Property(e => e.logintriedip).HasMaxLength(50);
             entity.Property(e => e.rcreate).HasDefaultValueSql("CURRENT_TIMESTAMP");
@@ -127,7 +123,6 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("rightmaster");
 
-            entity.Property(e => e.rightmasterid).ValueGeneratedNever();
             entity.Property(e => e.companycode).HasMaxLength(50);
             entity.Property(e => e.createdby).HasMaxLength(128);
             entity.Property(e => e.description).HasMaxLength(100);
@@ -146,7 +141,6 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("shiftmaster");
 
-            entity.Property(e => e.shiftmasterid).ValueGeneratedNever();
             entity.Property(e => e.companycode).HasMaxLength(50);
             entity.Property(e => e.createdby).HasMaxLength(128);
             entity.Property(e => e.rcreate).HasDefaultValueSql("CURRENT_TIMESTAMP");
@@ -164,7 +158,6 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("skillmaster");
 
-            entity.Property(e => e.skillmasterid).ValueGeneratedNever();
             entity.Property(e => e.companycode).HasMaxLength(50);
             entity.Property(e => e.createdby).HasMaxLength(128);
             entity.Property(e => e.description).HasMaxLength(100);
@@ -182,17 +175,12 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("useraccessgroupmaster");
 
-            entity.Property(e => e.useraccessgroupid).ValueGeneratedNever();
             entity.Property(e => e.accessgroupname).HasMaxLength(128);
             entity.Property(e => e.createdby).HasMaxLength(20);
             entity.Property(e => e.description).HasMaxLength(100);
-            entity.Property(e => e.rcreate)
-                .HasDefaultValueSql("CURRENT_TIMESTAMP")
-                .HasColumnType("timestamp without time zone");
-            entity.Property(e => e.revent).HasMaxLength(255);
-            entity.Property(e => e.rupdate)
-                .HasDefaultValueSql("CURRENT_TIMESTAMP")
-                .HasColumnType("timestamp without time zone");
+            entity.Property(e => e.rcreate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            entity.Property(e => e.revent).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            entity.Property(e => e.rupdate).HasDefaultValueSql("CURRENT_TIMESTAMP");
             entity.Property(e => e.updatedby).HasMaxLength(20);
         });
 
@@ -202,7 +190,6 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("usercompanysite");
 
-            entity.Property(e => e.usercompanysiteid).ValueGeneratedNever();
             entity.Property(e => e.companycode).HasMaxLength(50);
             entity.Property(e => e.createdby).HasMaxLength(128);
             entity.Property(e => e.rcreate).HasDefaultValueSql("CURRENT_TIMESTAMP");
@@ -214,7 +201,7 @@ public partial class AppDbContext : DbContext
             entity.HasOne(d => d.user).WithMany(p => p.usercompanysites)
                 .HasForeignKey(d => d.userid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_user");
+                .HasConstraintName("fk_user_company_site");
         });
 
         modelBuilder.Entity<usermaster>(entity =>
@@ -223,7 +210,6 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("usermaster");
 
-            entity.Property(e => e.profileid).ValueGeneratedNever();
             entity.Property(e => e.addressline1).HasMaxLength(20);
             entity.Property(e => e.addressline2).HasMaxLength(20);
             entity.Property(e => e.addressline3).HasMaxLength(20);
@@ -261,7 +247,6 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("userskill");
 
-            entity.Property(e => e.userskillid).ValueGeneratedNever();
             entity.Property(e => e.createdby).HasMaxLength(128);
             entity.Property(e => e.rcreate).HasDefaultValueSql("CURRENT_TIMESTAMP");
             entity.Property(e => e.revent).HasMaxLength(255);
