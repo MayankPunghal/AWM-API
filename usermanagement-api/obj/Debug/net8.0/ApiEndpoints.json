@@ -1,0 +1,34 @@
+[
+  {
+    "ContainingType": "usermanagement_api.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/1/users/loginbyusername",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userLoginDto",
+        "Type": "usermanagement_api.DTOs.UserLoginRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "usermanagement_api.Controllers.AuthController",
+    "Method": "Register",
+    "RelativePath": "api/1/users/registeruser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userRegisterDto",
+        "Type": "usermanagement_api.DTOs.UserRegisterRequestDto",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

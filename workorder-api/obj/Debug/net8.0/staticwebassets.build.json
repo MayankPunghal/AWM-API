@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "/oBUyiC6KCDKGl+X2f2fTGXnfLByXbNpn6Q8GcWY1PQ=",
+  "Source": "workorder-api",
+  "BasePath": "_content/workorder-api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
