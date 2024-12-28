@@ -25,7 +25,7 @@ namespace usermanagement_api.Controllers
         [Route(ApiRoute.users.getusers)]
         [AllowAnonymousToken]
         [HttpGet]
-        public async Task<IActionResult> GetUsers([FromQuery] int page = 1, [FromQuery] int size = 10)
+        public async Task<IActionResult> GetUsers([FromQuery] int page = 1, [FromQuery] int size = 10, [FromQuery] string searchText = "")
         {
             if (page <= 0 || size <= 0)
             {
@@ -33,7 +33,7 @@ namespace usermanagement_api.Controllers
             }
             try
             {
-                var users = await _userService.GetAllUsersAsync(page,size);
+                var users = await _userService.GetAllUsersAsync(page,size,searchText);
                 return Ok(users);
             }
             catch (Exception ex)

@@ -62,11 +62,11 @@ public class UserService : IUserService
 
         }
     }
-    public async Task<PaginatedResultDto> GetAllUsersAsync(int page, int size)
+    public async Task<PaginatedResultDto> GetAllUsersAsync(int page, int size, string searchText)
     {
         try
         {
-            var paginatedUserList = await _userRepository.GetUsersListPaginationAsync(page, size);
+            var paginatedUserList = await _userRepository.GetUsersListPaginationAsync(page, size, searchText);
             return paginatedUserList;
         }
         catch (Exception ex)
