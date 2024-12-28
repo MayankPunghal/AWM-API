@@ -8,5 +8,6 @@ namespace usermanagement_api.Interfaces
         Task<usermaster> GetUserByUsernameAsync(string username);
         Task AddUserAsync(usermaster user);
         Task<PaginatedResultDto> GetUsersListPaginationAsync(int page, int size, string searchText);
+        Task<usermaster> GetUserByIdAsync(long id);
     }
 }

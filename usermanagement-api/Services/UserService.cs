@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Text;
 using Common.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using usermanagement_api.DTOs;
 using usermanagement_api.Interfaces;
@@ -73,6 +74,29 @@ public class UserService : IUserService
         {
             _logger.LogError($"Error while fetching users: {ex.Message}");
             throw new Exception("Error while fetching users.");
+        }
+    }
+
+    public async Task<UserDetailsResponseDto> GetUserByIdAsync(long id)
+    {
+        try
+        {
+            var userDetails =  await _userRepository.GetUserByIdAsync(id);
+            return new UserDetailsResponseDto
+            {
+                profileid = userDetails.profileid,
+                username = userDetails.username,
+                firstname = userDetails.firstname,
+                lastname = userDetails.lastname,
+                emailid = userDetails.emailid,
+                contactno = userDetails.contactno,
+                displayname = userDetails.displayname,
+
+            };
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error fetching user", ex);
         }
     }
 }

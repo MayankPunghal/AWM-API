@@ -147,5 +147,11 @@ namespace usermanagement_api.Repositories
             }
         }
 
+        public async Task<usermaster> GetUserByIdAsync(long id)
+        {
+            return await _context.usermasters
+                .Where(u => u.profileid == id)
+                .FirstOrDefaultAsync();
+        }
     }
 }

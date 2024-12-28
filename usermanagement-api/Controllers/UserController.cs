@@ -44,26 +44,27 @@ namespace usermanagement_api.Controllers
         }
 
         //// Endpoint for getting user details by ID
-        //[Route(ApiRoute.users.getuserbyid)]
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetUserById(long id)
-        //{
-        //    try
-        //    {
-        //        var user = await _userService.GetUserByIdAsync(id);
-        //        if (user == null)
-        //        {
-        //            return NotFound("User not found.");
-        //        }
+        [Route(ApiRoute.users.getuserbyid)]
+        [AllowAnonymousToken]
+        [HttpGet()]
+        public async Task<IActionResult> GetUserById([FromQuery] long id)
+        {
+            try
+            {
+                var user = await _userService.GetUserByIdAsync(id); // Call the service to fetch user by ID
+                if (user == null)
+                {
+                    return NotFound("User not found.");
+                }
 
-        //        return Ok(user);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError($"Error while fetching user: {ex.Message}");
-        //        return StatusCode(500, "Internal server error.");
-        //    }
-        //}
+                return Ok(user); // Return the user details if found
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error while fetching user: {ex.Message}");
+                return StatusCode(500, "Internal server error.");
+            }
+        }
 
         //// Endpoint for creating a new user
         //[Route(ApiRoute.users.createuser)]
