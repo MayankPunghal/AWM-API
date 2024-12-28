@@ -1,63 +1,102 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Common.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using usermanagement_api.DTOs;
 using usermanagement_api.Interfaces;
 using usermanagement_api.Models;
 using usermanagement_api.Utilities;
 
-namespace usermanagement_api.Services
+namespace usermanagement_api.Services;
+
+public class UserService : IUserService
 {
-    public class UserService : IUserService
+    private readonly IUserRepository _userRepository;
+    private readonly IConfiguration _configuration;
+    private readonly ILogger _logger;
+
+    public UserService(IUserRepository userRepository, IConfiguration configuration)
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IConfiguration _configuration;
+        _userRepository = userRepository;
+        _configuration = configuration;
+    }
 
-        public UserService(IUserRepository userRepository, IConfiguration configuration)
+    public async Task<string> AuthenticateAsync(string username, string password)
+    {
+        var user = await _userRepository.GetUserByUsernameAsync(username);
+        if (user == null || user.password.VerifyPassword(password.HashPassword()))
+            throw new UnauthorizedAccessException("Invalid credentials.");
+
+        var claims = new[]
         {
-            _userRepository = userRepository;
-            _configuration = configuration;
-        }
-
-        public async Task<string> AuthenticateAsync(string username, string password)
-        {
-            var user = await _userRepository.GetUserByUsernameAsync(username);
-            if (user == null || user.password.VerifyPassword(password.HashPassword()))
-                throw new UnauthorizedAccessException("Invalid credentials.");
-
-            var claims = new[]
-            {
                 new Claim(ClaimTypes.Name, username),
                 new Claim(ClaimTypes.Role, "")
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:SecretKey"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:SecretKey"]));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var token = new JwtSecurityToken(
-                issuer: _configuration["JwtSettings:Issuer"],
-                audience: _configuration["JwtSettings:Audience"],
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(Convert.ToDouble(_configuration["JwtSettings:ExpirationMinutes"])),
-                signingCredentials: creds);
+        var token = new JwtSecurityToken(
+            issuer: _configuration["JwtSettings:Issuer"],
+            audience: _configuration["JwtSettings:Audience"],
+            claims: claims,
+            expires: DateTime.Now.AddMinutes(Convert.ToDouble(_configuration["JwtSettings:ExpirationMinutes"])),
+            signingCredentials: creds);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
+        return new JwtSecurityTokenHandler().WriteToken(token);
+    }
 
-        public async Task RegisterAsync(usermaster user)
+    public async Task RegisterAsync(usermaster user)
+    {
+        try
         {
-            try
-            {
-                if (await _userRepository.GetUserByUsernameAsync(user.username) != null)
-                    throw new InvalidOperationException("User already exists.");
-                user.password = user.password.HashPassword();
-                user.rcreate = DateTime.UtcNow;
-                await _userRepository.AddUserAsync(user);
-            }
-            catch (Exception ex)
-            {
+            if (await _userRepository.GetUserByUsernameAsync(user.username) != null)
+                throw new InvalidOperationException("User already exists.");
+            user.password = user.password.HashPassword();
+            user.rcreate = DateTime.UtcNow;
+            await _userRepository.AddUserAsync(user);
+        }
+        catch (Exception ex)
+        {
 
-            }            
+        }
+    }
+    public async Task<PaginatedResultDto> GetAllUsersAsync(int page, int size, string searchText)
+    {
+        try
+        {
+            var paginatedUserList = await _userRepository.GetUsersListPaginationAsync(page, size, searchText);
+            return paginatedUserList;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Error while fetching users: {ex.Message}");
+            throw new Exception("Error while fetching users.");
+        }
+    }
+
+    public async Task<UserDetailsResponseDto> GetUserByIdAsync(long id)
+    {
+        try
+        {
+            var userDetails =  await _userRepository.GetUserByIdAsync(id);
+            return new UserDetailsResponseDto
+            {
+                profileid = userDetails.profileid,
+                username = userDetails.username,
+                firstname = userDetails.firstname,
+                lastname = userDetails.lastname,
+                emailid = userDetails.emailid,
+                contactno = userDetails.contactno,
+                displayname = userDetails.displayname,
+
+            };
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error fetching user", ex);
         }
     }
 }

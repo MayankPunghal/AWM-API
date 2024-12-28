@@ -1,4 +1,5 @@
-﻿using usermanagement_api.Models;
+﻿using usermanagement_api.DTOs;
+using usermanagement_api.Models;
 
 namespace usermanagement_api.Interfaces
 {
@@ -6,5 +7,7 @@ namespace usermanagement_api.Interfaces
     {
         Task<string> AuthenticateAsync(string username, string password);
         Task RegisterAsync(usermaster user);
+        Task<PaginatedResultDto> GetAllUsersAsync(int page, int size, string searchText);
+        Task<UserDetailsResponseDto> GetUserByIdAsync(long id);
     }
 }

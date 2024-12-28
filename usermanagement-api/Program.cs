@@ -1,3 +1,4 @@
+using Common.Repositories;
 using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -31,7 +32,7 @@ builder.Services.AddLogging(logging =>
     logging.AddDebug();
 });
 
-
+//builder.Services.AddAutoMapper(typeof(UserMappingProfile));
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
