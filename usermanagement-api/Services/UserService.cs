@@ -87,11 +87,23 @@ public class UserService : IUserService
                 profileid = userDetails.profileid,
                 username = userDetails.username,
                 firstname = userDetails.firstname,
+                middlename = userDetails.middlename,
                 lastname = userDetails.lastname,
+                displayname = userDetails.displayname,
                 emailid = userDetails.emailid,
                 contactno = userDetails.contactno,
-                displayname = userDetails.displayname,
-
+                contactno1 = userDetails.contactno1,
+                addressline1 = userDetails.addressline1,
+                addressline2 = userDetails.addressline2,
+                addressline3 = userDetails.addressline3,
+                town = userDetails.town,
+                district = userDetails.district,
+                city = userDetails.city,
+                state = userDetails.state,
+                country = userDetails.country,
+                zipcode = userDetails.zipcode,
+                managerid = userDetails.managerid,
+                managername = userDetails.managername               
             };
         }
         catch (Exception ex)

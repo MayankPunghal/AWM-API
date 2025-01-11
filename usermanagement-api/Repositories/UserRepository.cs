@@ -51,7 +51,6 @@ namespace usermanagement_api.Repositories
                 {
                     var searchableColumns = new List<string> { "username", "emailid", "firstname", "lastname", "displayname", "contactno" };
 
-                    // Build a predicate dynamically
                     var parameter = Expression.Parameter(typeof(usermaster), "user");
                     Expression? predicate = null;
 
@@ -59,6 +58,8 @@ namespace usermanagement_api.Repositories
                     {
                         var property = Expression.Property(parameter, column);
                         var containsMethod = typeof(string).GetMethod("Contains", new[] { typeof(string) })!;
+                        var toLowerMethod = typeof(string).GetMethod("ToLower", Type.EmptyTypes);
+                        var propertyToLower = Expression.Call(property, toLowerMethod);
                         var searchTextExpression = Expression.Constant(searchText);
                         var containsExpression = Expression.Call(property, containsMethod, searchTextExpression);
 
