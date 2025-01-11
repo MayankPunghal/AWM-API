@@ -51,4 +51,47 @@ namespace usermanagement_api.DTOs
         public string ContactNo { get; set; }
 
     }
+
+    public class UserDetailsResponseDto
+    {
+        public int profileid { get; set; }
+
+        public string username { get; set; } = null!;
+
+        public string firstname { get; set; } = null!;
+
+        public string? middlename { get; set; }
+
+        public string? lastname { get; set; }
+
+        public string displayname { get; set; } = null!;
+
+        public string contactno { get; set; } = null!;
+
+        public string? contactno1 { get; set; }
+
+        public string addressline1 { get; set; } = null!;
+
+        public string? addressline2 { get; set; }
+
+        public string? addressline3 { get; set; }
+
+        public string city { get; set; } = null!;
+
+        public string? state { get; set; }
+
+        public string? district { get; set; }
+
+        public string? town { get; set; }
+
+        public string country { get; set; } = null!;
+
+        public string zipcode { get; set; } = null!;
+
+        public int? managerid { get; set; }
+
+        public string? managername { get; set; }
+
+        public string? emailid { get; set; }
+    }
 }
