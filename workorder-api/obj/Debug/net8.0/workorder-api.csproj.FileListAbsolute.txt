@@ -285,3 +285,5 @@ C:\Projects\AWM-API\workorder-api\obj\Debug\net8.0\refint\workorder-api.dll
 C:\Projects\AWM-API\workorder-api\obj\Debug\net8.0\workorder-api.pdb
 C:\Projects\AWM-API\workorder-api\obj\Debug\net8.0\workorder-api.genruntimeconfig.cache
 C:\Projects\AWM-API\workorder-api\obj\Debug\net8.0\ref\workorder-api.dll
+C:\Projects\AWM-API\workorder-api\obj\Debug\net8.0\workorder-api.sourcelink.json
+C:\Projects\AWM-API\workorder-api\bin\Debug\net8.0\AutoMapper.dll

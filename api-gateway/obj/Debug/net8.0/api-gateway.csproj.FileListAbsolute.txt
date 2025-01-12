@@ -65,3 +65,15 @@ C:\Projects\AWM-API\api-gateway\obj\Debug\net8.0\refint\api-gateway.dll
 C:\Projects\AWM-API\api-gateway\obj\Debug\net8.0\api-gateway.pdb
 C:\Projects\AWM-API\api-gateway\obj\Debug\net8.0\api-gateway.genruntimeconfig.cache
 C:\Projects\AWM-API\api-gateway\obj\Debug\net8.0\ref\api-gateway.dll
+C:\Projects\AWM-API\api-gateway\bin\Debug\net8.0\ocelot.json
+C:\Projects\AWM-API\api-gateway\bin\Debug\net8.0\FluentValidation.dll
+C:\Projects\AWM-API\api-gateway\bin\Debug\net8.0\IPAddressRange.dll
+C:\Projects\AWM-API\api-gateway\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Projects\AWM-API\api-gateway\bin\Debug\net8.0\Microsoft.AspNetCore.MiddlewareAnalysis.dll
+C:\Projects\AWM-API\api-gateway\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Projects\AWM-API\api-gateway\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Projects\AWM-API\api-gateway\bin\Debug\net8.0\Microsoft.Extensions.DiagnosticAdapter.dll
+C:\Projects\AWM-API\api-gateway\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Projects\AWM-API\api-gateway\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
+C:\Projects\AWM-API\api-gateway\bin\Debug\net8.0\Ocelot.dll
+C:\Projects\AWM-API\api-gateway\obj\Debug\net8.0\api-gateway.sourcelink.json

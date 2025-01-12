@@ -285,3 +285,7 @@ C:\Projects\AWM-API\usermanagement-api\obj\Debug\net8.0\refint\usermanagement-ap
 C:\Projects\AWM-API\usermanagement-api\obj\Debug\net8.0\usermanagement-api.pdb
 C:\Projects\AWM-API\usermanagement-api\obj\Debug\net8.0\usermanagement-api.genruntimeconfig.cache
 C:\Projects\AWM-API\usermanagement-api\obj\Debug\net8.0\ref\usermanagement-api.dll
+C:\Projects\AWM-API\usermanagement-api\obj\Debug\net8.0\usermanagement-api.sourcelink.json
+C:\Projects\AWM-API\usermanagement-api\bin\Debug\net8.0\AutoMapper.dll
+C:\Projects\AWM-API\usermanagement-api\bin\Debug\net8.0\Common.dll
+C:\Projects\AWM-API\usermanagement-api\bin\Debug\net8.0\Common.pdb

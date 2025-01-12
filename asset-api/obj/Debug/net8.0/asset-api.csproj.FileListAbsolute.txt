@@ -285,3 +285,5 @@ C:\Projects\AWM-API\asset-api\obj\Debug\net8.0\refint\asset-api.dll
 C:\Projects\AWM-API\asset-api\obj\Debug\net8.0\asset-api.pdb
 C:\Projects\AWM-API\asset-api\obj\Debug\net8.0\asset-api.genruntimeconfig.cache
 C:\Projects\AWM-API\asset-api\obj\Debug\net8.0\ref\asset-api.dll
+C:\Projects\AWM-API\asset-api\obj\Debug\net8.0\asset-api.sourcelink.json
+C:\Projects\AWM-API\asset-api\bin\Debug\net8.0\AutoMapper.dll
