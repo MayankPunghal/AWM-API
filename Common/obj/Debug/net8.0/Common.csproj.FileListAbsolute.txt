@@ -1,0 +1,13 @@
+C:\Projects\AWM-API\Common\bin\Debug\net8.0\Common.deps.json
+C:\Projects\AWM-API\Common\bin\Debug\net8.0\Common.dll
+C:\Projects\AWM-API\Common\bin\Debug\net8.0\Common.pdb
+C:\Projects\AWM-API\Common\obj\Debug\net8.0\Common.csproj.AssemblyReference.cache
+C:\Projects\AWM-API\Common\obj\Debug\net8.0\Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\AWM-API\Common\obj\Debug\net8.0\Common.AssemblyInfoInputs.cache
+C:\Projects\AWM-API\Common\obj\Debug\net8.0\Common.AssemblyInfo.cs
+C:\Projects\AWM-API\Common\obj\Debug\net8.0\Common.csproj.CoreCompileInputs.cache
+C:\Projects\AWM-API\Common\obj\Debug\net8.0\Common.sourcelink.json
+C:\Projects\AWM-API\Common\obj\Debug\net8.0\Common.dll
+C:\Projects\AWM-API\Common\obj\Debug\net8.0\refint\Common.dll
+C:\Projects\AWM-API\Common\obj\Debug\net8.0\Common.pdb
+C:\Projects\AWM-API\Common\obj\Debug\net8.0\ref\Common.dll
