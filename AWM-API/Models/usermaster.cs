@@ -55,7 +55,7 @@ public partial class usermaster
 
     public DateTime lastupdated { get; set; }
 
-    public string updateby { get; set; } = null!;
+    public string updatedby { get; set; } = null!;
 
     public DateTime? rcreate { get; set; }
 

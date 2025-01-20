@@ -9,5 +9,6 @@ namespace usermanagement_api.Interfaces
         Task RegisterAsync(usermaster user);
         Task<PaginatedResultDto> GetAllUsersAsync(int page, int size, string searchText);
         Task<UserDetailsResponseDto> GetUserByIdAsync(long id);
+        Task UpdateUserAsync(UserEditDto user,int id);
     }
 }

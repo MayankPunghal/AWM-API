@@ -6,6 +6,11 @@ namespace usermanagement_api.DTOs
     public class UserDTOs
     {
     }
+    public class LoggedInUserDetails
+    {
+        [Required]
+        public int LoggedInProfileId { get; set; }
+    }
     public class UserRegisterRequestDto
     {
         [Required]
@@ -22,7 +27,15 @@ namespace usermanagement_api.DTOs
         [Required]
         public string DisplayName { get; set; } = null!;
         [Required]
-        public int ContactNo { get; set; }
+        public string ContactNo { get; set; }
+        [Required]
+        public string AddressLine1 { get; set; }
+        [Required]
+        public string ZipCode { get; set; }
+        [Required]
+        public string City { get; set; }
+        [Required]
+        public string Country { get; set; }
 
     }
 
@@ -40,7 +53,7 @@ namespace usermanagement_api.DTOs
     }
 
 
-    public class UserListResponseDto
+    public class UserListResponseDto : LoggedInUserDetails
     {
         public int UserId { get; set; }
         public string Username { get; set; }
@@ -52,7 +65,7 @@ namespace usermanagement_api.DTOs
 
     }
 
-    public class UserDetailsResponseDto
+    public class UserDetailsResponseDto : LoggedInUserDetails
     {
         public int profileid { get; set; }
 
@@ -93,5 +106,32 @@ namespace usermanagement_api.DTOs
         public string? managername { get; set; }
 
         public string? emailid { get; set; }
+        public DateTime lastupdated { get; set; }
+        public string updatedby { get; set; }
+    }
+    public class UserEditDto : LoggedInUserDetails
+    {
+        [Required]
+        public string Username { get; set; } = null!;
+        [Required]
+        [EmailAddress]
+        public string UserEmail { get; set; } = null!;
+        [Required]
+        public string FirstName { get; set; } = null!;
+        [Required]
+        public string LastName { get; set; } = null!;
+        public string MiddleName { get; set; } = null!;
+        [Required]
+        public string DisplayName { get; set; } = null!;
+        [Required]
+        public string ContactNo { get; set; }
+        [Required]
+        public string AddressLine1 { get; set; }
+        [Required]
+        public string ZipCode { get; set; }
+        [Required]
+        public string City { get; set; }
+        [Required]
+        public string Country { get; set; }
     }
 }

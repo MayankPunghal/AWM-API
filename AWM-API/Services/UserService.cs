@@ -12,6 +12,7 @@ namespace usermanagement_api.Services;
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
+    //private readonly IGenericRepository _genericRepository;
     private readonly IConfiguration _configuration;
     private readonly ILogger _logger;
 
@@ -31,7 +32,7 @@ public class UserService : IUserService
         {
                 new Claim(ClaimTypes.Name, username),
                 new Claim(ClaimTypes.Role, "")
-            };
+        };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:SecretKey"]));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -101,12 +102,37 @@ public class UserService : IUserService
                 country = userDetails.country,
                 zipcode = userDetails.zipcode,
                 managerid = userDetails.managerid,
-                managername = userDetails.managername               
+                managername = userDetails.managername,
+                lastupdated = userDetails.lastupdated,
+                updatedby = userDetails.updatedby
             };
         }
         catch (Exception ex)
         {
             throw new Exception("Error fetching user", ex);
         }
+    }
+    public async Task UpdateUserAsync(UserEditDto user, int id)
+    {
+        var existingUser = await _userRepository.GetUserByIdAsync(id);
+        if (existingUser == null)
+        {
+            throw new Exception("User not found.");
+        }
+        existingUser.username = user.Username;
+        existingUser.emailid = user.UserEmail;
+        existingUser.firstname = user.FirstName;
+        existingUser.middlename = user.MiddleName;
+        existingUser.lastname = user.LastName;
+        existingUser.displayname = user.DisplayName;
+        existingUser.contactno = user.ContactNo.ToString();
+        existingUser.addressline1 = user.AddressLine1;
+        existingUser.city = user.City;
+        existingUser.zipcode = user.ZipCode;
+        existingUser.country = user.Country;
+        existingUser.lastupdated = DateTime.UtcNow;
+        existingUser.updatedby = user.LoggedInProfileId.ToString();
+
+        await _userRepository.UpdateUserAsync(existingUser);
     }
 }
