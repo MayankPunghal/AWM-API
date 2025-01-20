@@ -154,5 +154,18 @@ namespace usermanagement_api.Repositories
                 .Where(u => u.profileid == id)
                 .FirstOrDefaultAsync();
         }
+
+        public async Task UpdateUserAsync(usermaster user)
+        {
+            try
+            {
+                _context.usermasters.Update(user);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Error occurred while updating the user.", ex);
+            }
+        }
     }
 }

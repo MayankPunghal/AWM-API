@@ -20,6 +20,8 @@ public class ApiRoute
         internal const string registeruser = Route + "registeruser";
         internal const string loginbyusername = Route + "loginbyusername";
         internal const string loginbyemail = Route + "loginbyemail";
+        internal const string createuser = Route + "createuser";
+        internal const string edituser = Route + "edituser";
     }
 
     internal static class workorders

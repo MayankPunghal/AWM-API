@@ -232,7 +232,7 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.rupdate).HasDefaultValueSql("CURRENT_TIMESTAMP");
             entity.Property(e => e.state).HasMaxLength(20);
             entity.Property(e => e.town).HasMaxLength(20);
-            entity.Property(e => e.updateby).HasMaxLength(128);
+            entity.Property(e => e.updatedby).HasMaxLength(128);
             entity.Property(e => e.username).HasMaxLength(50);
             entity.Property(e => e.zipcode).HasMaxLength(20);
 
