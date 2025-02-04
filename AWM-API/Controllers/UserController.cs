@@ -39,7 +39,7 @@ namespace usermanagement_api.Controllers
             }
             try
             {
-                var users = await _userService.GetAllUsersAsync(page,size,searchText);
+                var users = await _userService.GetAllUsersAsync(page, size, searchText);
                 return Ok(new ApiResponseDto<object>
                 {
                     Success = true,
@@ -54,11 +54,11 @@ namespace usermanagement_api.Controllers
             }
         }
 
-        //// Endpoint for getting user details by ID
+        // Endpoint for getting user details by ID
         [Route(ApiRoute.users.getuserbyid)]
         [AllowAnonymousToken]
         [HttpGet()]
-        public async Task<IActionResult> GetUserById([FromQuery] long id)
+        public async Task<IActionResult> GetUserById([FromQuery] int id)
         {
             try
             {
@@ -175,7 +175,7 @@ namespace usermanagement_api.Controllers
 
             try
             {
-                await _userService.UpdateUserAsync(userEditDto,id);
+                await _userService.UpdateUserAsync(userEditDto, id);
                 return Ok("User updated successfully.");
             }
             catch (Exception ex)
@@ -184,5 +184,41 @@ namespace usermanagement_api.Controllers
                 return StatusCode(500, "Internal server error.");
             }
         }
+        // Endpoint for deleting a user by ID
+        [Route(ApiRoute.users.deleteuser)]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteUser([FromQuery] int id)
+        {
+            try
+            {
+                var user = await _userService.GetUserByIdAsync(id);
+                if (user == null)
+                {
+                    return NotFound(new ApiResponseDto<object>
+                    {
+                        Success = false,
+                        Message = "User not found."
+                    });
+                }
+
+                await _userService.DeleteUserAsync(id);
+
+                return Ok(new ApiResponseDto<object>
+                {
+                    Success = true,
+                    Message = "User deleted successfully."
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error while deleting user: {ex.Message}");
+                return StatusCode(500, new ApiResponseDto<object>
+                {
+                    Success = false,
+                    Message = "Internal server error. Please try again later."
+                });
+            }
+        }
+
     }
 }

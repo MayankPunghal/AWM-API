@@ -12,14 +12,15 @@ namespace usermanagement_api.Services;
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
-    //private readonly IGenericRepository _genericRepository;
+    private readonly IGenericRepository<usermaster> _genericUserRepository;
     private readonly IConfiguration _configuration;
     private readonly ILogger _logger;
 
-    public UserService(IUserRepository userRepository, IConfiguration configuration)
+    public UserService(IUserRepository userRepository, IConfiguration configuration, IGenericRepository<usermaster> genericUserRepository)
     {
         _userRepository = userRepository;
         _configuration = configuration;
+        _genericUserRepository = genericUserRepository;
     }
 
     public async Task<string> AuthenticateAsync(string username, string password)
@@ -55,7 +56,7 @@ public class UserService : IUserService
                 throw new InvalidOperationException("User already exists.");
             user.password = user.password.HashPassword();
             user.rcreate = DateTime.UtcNow;
-            await _userRepository.AddUserAsync(user);
+            await _genericUserRepository.AddAsync(user);
         }
         catch (Exception ex)
         {
@@ -76,11 +77,11 @@ public class UserService : IUserService
         }
     }
 
-    public async Task<UserDetailsResponseDto> GetUserByIdAsync(long id)
+    public async Task<UserDetailsResponseDto> GetUserByIdAsync(int id)
     {
         try
         {
-            var userDetails =  await _userRepository.GetUserByIdAsync(id);
+            var userDetails =  await _genericUserRepository.GetByIdAsync(id);
             return new UserDetailsResponseDto
             {
                 profileid = userDetails.profileid,
@@ -114,7 +115,7 @@ public class UserService : IUserService
     }
     public async Task UpdateUserAsync(UserEditDto user, int id)
     {
-        var existingUser = await _userRepository.GetUserByIdAsync(id);
+        var existingUser = await _genericUserRepository.GetByIdAsync(id);
         if (existingUser == null)
         {
             throw new Exception("User not found.");
@@ -133,6 +134,19 @@ public class UserService : IUserService
         existingUser.lastupdated = DateTime.UtcNow;
         existingUser.updatedby = user.LoggedInProfileId.ToString();
 
-        await _userRepository.UpdateUserAsync(existingUser);
+        await _genericUserRepository.UpdateAsync(existingUser);
     }
+
+    public async Task<bool> DeleteUserAsync(int id)
+    {
+        var user = await _genericUserRepository.GetByIdAsync(id);
+        if (user == null)
+        {
+            throw new Exception("User not found.");
+        }
+
+        await _genericUserRepository.DeleteAsync(user);
+        return true;
+    }
+
 }
